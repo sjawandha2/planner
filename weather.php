@@ -12,6 +12,6 @@ if (isset($_POST['submit'])) {
     $characters = json_decode($data);
 //    print_r($characters);
     echo "City: " . $characters->name;
-//    echo "Temp: " . $characters['main']->temp;
+    echo "Temp: " ;
 }
 ?>
