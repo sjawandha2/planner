@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/html">
 <head>
     <title>Login V2</title>
     <meta charset="UTF-8">
@@ -32,33 +32,30 @@
 <div class="limiter">
     <div class="container-login100">
         <div class="wrap-login100">
-                <span class="login100-form-title p-b-48">
+            <button class="btn-outline-danger"><a href='/planner'>Search</a></button>
+
+            <span class="login100-form-title p-b-48">
 						<i class="pointer-event">{{@city}},{{@country}} </i>
-					</span>
+            </span>
             <div class="text-center">
-<!--                <h1>{{@city}},{{@country}} </h1>-->
                 <h2>{{ @temperature}}F</h2>
                 <hr>
                 <p>Today:<Strong> {{@weather}}</Strong> currently. The high will be
                     <Strong> {{@maxtemp}}</Strong>F with low of<Strong> {{@mintemp}}</Strong>F.</p><br>
                 <ul>
                     <li><Strong>Humidity: </Strong> {{@humidity}}%</li>
-                    <li><Strong>Wind: </Strong> {{@windSpeed}}mph</li>
+                    <li><Strong>Wind: </Strong> {{@windSpeed}} mph</li>
                     <li><Strong>Pressure: </Strong> {{@pressure}} inHg</li>
                     <li><Strong>Pressure: </Strong> {{@pressure}} inHg</li>
                     <li><Strong>Sunrise: </Strong> {{@sunrise}}</li>
                     <li><Strong>Sunset: </Strong> {{@sunset}}</li>
-                    <li><Strong>INfo: </Strong> {{@info}}</li>
-                    <li>Image: {{@infoImg}}</li>
-
+                    <li><Strong>Info: </Strong> {{@info}}</li>
+                    <li><Strong>Image: </Strong> {{@infoImg}}</li>
                 </ul>
             </div>
         </div>
     </div>
 </div>
-
-
-<div id="dropDownSelect1"></div>
 
 <!--===============================================================================================-->
 <script src="vendor/jquery/jquery-3.2.1.min.js"></script>

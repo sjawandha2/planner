@@ -24,7 +24,13 @@ $f3->route('GET|POST /', function ($f3) {
     if (!empty($_POST)) {
         $city = $_POST['city'];
         $kinds = $_POST['places'];
-        $radius = $_POST['distance'];
+        $radi = $_POST['distance'];
+
+        //set value for miles radius
+        $f3->set('miles', $radi);
+
+        // convert miles to meters
+        $radius = ($radi*1609);
 
         $f3->set('city', $city);
         $f3->set('places', $kinds);
@@ -67,18 +73,17 @@ $f3->route('GET|POST /', function ($f3) {
             $lon = $characters->coord->lon;
             $lat = $characters->coord->lat;
 
-            $f3->set('city',$city);
-            $f3->set('country',$country);
-            $f3->set('weather',$weather);
-            $f3->set('windSpeed',$windSpeed);
-            $f3->set('temperature',$temperature);
-            $f3->set('maxtemp',$maxtemp);
-            $f3->set('mintemp',$mintemp);
-            $f3->set('humidity',$humidity);
-            $f3->set('sunset',$sunset);
-            $f3->set('sunrise',$sunrise);
-            $f3->set('pressure',$pressure);
-
+            $f3->set('city', $city);
+            $f3->set('country', $country);
+            $f3->set('weather', $weather);
+            $f3->set('windSpeed', $windSpeed);
+            $f3->set('temperature', $temperature);
+            $f3->set('maxtemp', $maxtemp);
+            $f3->set('mintemp', $mintemp);
+            $f3->set('humidity', $humidity);
+            $f3->set('sunset', $sunset);
+            $f3->set('sunrise', $sunrise);
+            $f3->set('pressure', $pressure);
 
 //all the attributes to send an api request to opentripmap.com
 
@@ -129,6 +134,7 @@ $f3->route('GET|POST /', function ($f3) {
     $view = new Template();
     echo $view->render('views/planner.html');
 });
+
 
 
 //Run Fat-Free
