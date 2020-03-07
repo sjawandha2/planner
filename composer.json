@@ -1,0 +1,12 @@
+{
+  "name": "sjawandh/372/planner",
+  "authors": [
+    {
+      "name": "Sukhveer Jawandha",
+      "email": "sjawandha2@mail.greenriver.edu"
+    }
+  ],
+  "require": {
+    "bcosca/fatfree-core": "dev-master"
+  }
+}
