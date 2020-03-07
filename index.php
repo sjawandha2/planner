@@ -67,23 +67,20 @@ $f3->route('GET|POST /', function ($f3) {
             $lon = $characters->coord->lon;
             $lat = $characters->coord->lat;
 
-//            Need print data to view file
-
-
-            // print data
-//            echo "<h1>Location: $city,$country </h1>";
-//            echo "<h3>$temperature F</h3><hr>";
-//            echo "<h4>Today:<Strong> $weather</Strong> currently. The high will be
-//<Strong> $maxtemp</Strong>F with low of<Strong> $mintemp</Strong>F.</h4>";
-//            echo "<Strong>Humidity: </Strong> $humidity %
-//   <br><Strong>Wind: </Strong> $windSpeed mph
-//   <br><Strong>Pressure: </Strong> $pressure inHg
-//   <br><Strong>Sunrise: </Strong> $sunrise
-//  <br><Strong>Sunset: </Strong> $sunset";
+            $f3->set('city',$city);
+            $f3->set('country',$country);
+            $f3->set('weather',$weather);
+            $f3->set('windSpeed',$windSpeed);
+            $f3->set('temperature',$temperature);
+            $f3->set('maxtemp',$maxtemp);
+            $f3->set('mintemp',$mintemp);
+            $f3->set('humidity',$humidity);
+            $f3->set('sunset',$sunset);
+            $f3->set('sunrise',$sunrise);
+            $f3->set('pressure',$pressure);
 
 
 //all the attributes to send an api request to opentripmap.com
-            echo "<br> There is a error with event APi<br>";
 
 //            $eventsKey = '5ae2e3f221c38a28845f05b62269320ee1152b3977ead5ffe690f1c5';
 ////kinds can be separated by a comma to send a list of type of places
@@ -99,7 +96,21 @@ $f3->route('GET|POST /', function ($f3) {
 //            if ($details) {
 //                echo "Here is a list of suggested $kinds: <br>";
 //                for ($x = 0; $x < sizeof($details->features); $x++) {
-//                    echo $details->features[$x]->properties->name . "<br>";
+//                   // echo $details->features[$x]->properties->name . "<br>";
+//
+//
+//                    $info = $details->features[$x]->properties->name . "<br>";
+//
+//
+//                    //retrieve the object id
+//                    $xid = $details->features[$x]->properties->xid;
+//                    $objectUrl = "https://api.opentripmap.com/0.1/$language/places/xid/$xid?apikey=$eventsKey";
+//                    $objectResponse = json_decode(file_get_contents($objectUrl));
+//                    $image = $objectResponse->preview->source;
+//                    $infoImg ='<img src="' . $image . '" alt="Image not found" scale="0"><br><br>';
+//
+//                    $f3->set('info', $info);
+//                    $f3->set('infoImg', $infoImg);
 //                }
 //            } else {
 //                echo "Try a larger distance than $radius meters";
@@ -108,6 +119,8 @@ $f3->route('GET|POST /', function ($f3) {
 //        }
 //        else {
 //            echo "Please enter a valid city";
+            $view = new Template();
+            echo $view->render('views/info.html');
         }
 
     }

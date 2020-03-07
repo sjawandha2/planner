@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -33,21 +32,27 @@
 <div class="limiter">
     <div class="container-login100">
         <div class="wrap-login100">
-            echo "<h1>Location: $city,$country </h1>";
-            echo "<h3>$temperature F</h3><hr>";
-            echo "<h4>Today:<Strong> $weather</Strong> currently. The high will be
-            <Strong> $maxtemp</Strong>F with low of<Strong> $mintemp</Strong>F.</h4>";
-            echo "<Strong>Humidity: </Strong>  {{ @SESSION.humidity }}%
-            <br><Strong>Wind: </Strong> $windSpeed mph
-            <br><Strong>Pressure: </Strong> $pressure inHg
-            <br><Strong>Sunrise: </Strong> $sunrise
-            <br><Strong>Sunset: </Strong> $sunset";
-                <!--                <span class="login100-form-title p-b-26">-->
-                <!--						Welcome-->
-                <!--					</span>-->
                 <span class="login100-form-title p-b-48">
-						<i class="pointer-event">Planner</i>
+						<i class="pointer-event">{{@city}},{{@country}} </i>
 					</span>
+            <div class="text-center">
+<!--                <h1>{{@city}},{{@country}} </h1>-->
+                <h2>{{ @temperature}}F</h2>
+                <hr>
+                <p>Today:<Strong> {{@weather}}</Strong> currently. The high will be
+                    <Strong> {{@maxtemp}}</Strong>F with low of<Strong> {{@mintemp}}</Strong>F.</p><br>
+                <ul>
+                    <li><Strong>Humidity: </Strong> {{@humidity}}%</li>
+                    <li><Strong>Wind: </Strong> {{@windSpeed}}mph</li>
+                    <li><Strong>Pressure: </Strong> {{@pressure}} inHg</li>
+                    <li><Strong>Pressure: </Strong> {{@pressure}} inHg</li>
+                    <li><Strong>Sunrise: </Strong> {{@sunrise}}</li>
+                    <li><Strong>Sunset: </Strong> {{@sunset}}</li>
+                    <li><Strong>INfo: </Strong> {{@info}}</li>
+                    <li>Image: {{@infoImg}}</li>
+
+                </ul>
+            </div>
         </div>
     </div>
 </div>
