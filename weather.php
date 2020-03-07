@@ -40,6 +40,11 @@ if (!empty($_POST['city']) && isset($_POST['submit'])) {
         $lon = $characters->coord->lon;
         $lat = $characters->coord->lat;
 
+        //Please don't erase!! I need them for testing!
+//        $lon = '-122.33';
+//        $lat = '47.61';
+    //     $xid = 'N2404231206'; W119705479
+
         // print data
         echo "<h1>Location: $city,$country </h1>";
         echo "<h3>$temperature F</h3><hr>";
@@ -62,7 +67,7 @@ if (!empty($_POST['city']) && isset($_POST['submit'])) {
 //url containing all attributes
     $eventsUrl ="https://api.opentripmap.com/0.1/$language/places/radius?radius=$radius&lon=$lon&lat=$lat&kinds=$kinds&apikey=$eventsKey";
 
-//print the response
+// the response
     $allEvents = file_get_contents($eventsUrl);
     $details = json_decode($allEvents);
 
@@ -70,7 +75,16 @@ if (!empty($_POST['city']) && isset($_POST['submit'])) {
     {
         echo"Here is a list of suggested $kinds: <br>";
         for ($x = 0; $x < sizeof($details->features); $x++) {
+
             echo $details->features[$x]->properties->name."<br>";
+
+            //retrieve the object id
+            $xid = $details->features[$x]->properties->xid;
+            $objectUrl = "https://api.opentripmap.com/0.1/$language/places/xid/$xid?apikey=$eventsKey";
+            $objectResponse = json_decode(file_get_contents($objectUrl));
+            $image = $objectResponse->preview->source;
+            echo '<img src="'.$image.'" alt="Image not found" scale="0"><br><br>';
+
         }
     }
     else{
