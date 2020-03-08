@@ -81,9 +81,9 @@ $f3->route('GET|POST /', function ($f3) {
             $f3->set('maxtemp', $maxtemp);
             $f3->set('mintemp', $mintemp);
             $f3->set('humidity', $humidity);
+            $f3->set('pressure', $pressure);
             $f3->set('sunset', $sunset);
             $f3->set('sunrise', $sunrise);
-            $f3->set('pressure', $pressure);
 
 //all the attributes to send an api request to opentripmap.com
 
