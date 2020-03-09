@@ -30,7 +30,7 @@ $f3->route('GET|POST /', function ($f3) {
         $f3->set('miles', $radi);
 
         // convert miles to meters
-        $radius = ($radi*1609);
+        $radius = ($radi * 1609);
 
         $f3->set('city', $city);
         $f3->set('places', $kinds);
@@ -72,7 +72,7 @@ $f3->route('GET|POST /', function ($f3) {
             $country = $characters->sys->country;
             $lon = $characters->coord->lon;
             $lat = $characters->coord->lat;
-            $limit =5;
+            $limit = 5;
 
             //Store all the information to the session and fat-free
             $_SESSION['country'] = $country;
@@ -107,8 +107,8 @@ $f3->route('GET|POST /', function ($f3) {
             $eventsUrl = "https://api.opentripmap.com/0.1/$language/places/radius?radius=$radius&lon=$lon&lat=$lat&limit=$limit&kinds=$kinds&apikey=$eventsKey";
             $allEvents = file_get_contents($eventsUrl);
             $details = json_decode($allEvents);
-            $imageArray=[];
-            $infoArray =[];
+            $imageArray = [];
+            $infoArray = [];
 
             if ($details) {
                 //                echo "Here is a list of suggested $kinds: <br>";
@@ -129,18 +129,18 @@ $f3->route('GET|POST /', function ($f3) {
                     //$infoImg = '<img src="' . $image . '" alt="Image not found" scale="0"><br><br>';
 
 
-                    array_push($imageArray,$image);
-                    array_push($infoArray,$name);
+                    array_push($imageArray, $image);
+                    array_push($infoArray, $name);
 
 
                 }//for loop
 
                 //save all the images and information into fat-free and the session
-                $f3->set('imageArray',$imageArray);
+                $f3->set('imageArray', $imageArray);
                 $f3->set('infoArray', $infoArray);
 
-                $_SESSION['imageArray']=$imageArray;
-                $_SESSION['infoArray']=$infoArray;
+                $_SESSION['imageArray'] = $imageArray;
+                $_SESSION['infoArray'] = $infoArray;
             }//if details
 
             else {
@@ -159,7 +159,7 @@ $f3->route('GET|POST /', function ($f3) {
 
 //Define a default route
 $f3->route('GET|POST /info', function ($f3) {
-    if(!empty($_POST)){
+    if (!empty($_POST)) {
         session_unset();
         $f3->reroute('/');
     }
@@ -191,13 +191,13 @@ $f3->route('GET|POST /info', function ($f3) {
     $f3->set('pressure', $pressure);
     $f3->set('sunset', $sunset);
     $f3->set('sunrise', $sunrise);
-    $f3->set('imageArray',$imageArray);
+    $f3->set('imageArray', $imageArray);
     $f3->set('infoArray', $infoArray);
 
 
     //return to the main page, reset the session
     $view = new Template();
-    echo$view->render('views/info.html');
+    echo $view->render('views/info.html');
 });
 
 //Run Fat-Free

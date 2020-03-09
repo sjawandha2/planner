@@ -1,8 +1,7 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Login V2</title>
+    <title>Planner</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!--===============================================================================================-->
@@ -33,34 +32,34 @@
 <div class="limiter">
     <div class="container-login100">
         <div class="wrap-login100">
-            <form class="login100-form validate-form"  action="#" method="post">
-
-                <!--                <span class="login100-form-title p-b-26">-->
-                <!--						Welcome-->
-                <!--					</span>-->
+            <form class="login100-form validate-form" action="#" method="post">
                 <span class="login100-form-title p-b-48">
 						<i class="pointer-event">Planner</i>
 					</span>
                 <check if="{{ @errors['city'] }}">
                     <span class="err">{{ @errors['city'] }}</span>
-                </check><br>
-                <div class="wrap-input100 validate-input" >
-                    <input class="input100" type="text" name="city"placeholder="City" value="{{@city}}"/>
+                </check>
+                <br>
+                <div class="wrap-input100 validate-input">
+                    <input class="input100" type="text" name="city" placeholder="City" value="{{@city}}"/>
                 </div>
-
 
                 <check if="{{ @errors['places'] }}">
                     <span class="err">{{ @errors['places'] }}</span>
-                </check><br>
-                <div class="wrap-input100 validate-input" >
-                    <input class="input100" type="text" name="places" placeholder="Activities(bars,cafes)"value="{{@places}}"/>
+                </check>
+                <br>
+                <div class="wrap-input100 validate-input">
+                    <input class="input100" type="text" name="places" placeholder="Activities(bars,cafes)"
+                           value="{{@places}}"/>
                 </div>
 
                 <check if="{{ @errors['distance'] }}">
                     <span class="err">{{ @errors['distance'] }}</span>
-                </check><br>
-                <div class="wrap-input100 validate-input" >
-                    <input class="input100" type="int" name="distance" placeholder="Distance: 5 (miles)"value="{{@miles}}"/>
+                </check>
+                <br>
+                <div class="wrap-input100 validate-input">
+                    <input class="input100" type="int" name="distance" placeholder="Distance: 5 (miles)"
+                           value="{{@miles}}"/>
                 </div>
 
                 <div class="container-login100-form-bgbtn">
@@ -72,8 +71,6 @@
     </div>
 </div>
 
-
-<div id="dropDownSelect1"></div>
 
 <!--===============================================================================================-->
 <script src="vendor/jquery/jquery-3.2.1.min.js"></script>

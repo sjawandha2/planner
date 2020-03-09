@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/html">
 <head>
-    <title>Login V2</title>
+    <title>Planner</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!--===============================================================================================-->
@@ -29,41 +29,48 @@
 </head>
 <body>
 
-<div class="container limiter">
-    <div class="row container-login101">
-        <div class="col-md-5">
-            <div class="wrap-login100">
+<div class="limiter">
+    <div class="container-login100">
+        <div class="wrap-login100">
                 <span class="login100-form-title p-b-48">
                             <i class="pointer-event">{{@city}},{{@country}} </i>
                 </span>
-                <div class="text-center">
-                    <h2>{{ @temperature}}°F</h2>
-                    <hr>
-                    <p>Today:<Strong> {{@weather}}</Strong> currently. The high will be
-                        <Strong> {{@maxtemp}}°</Strong>F with low of <Strong>{{@mintemp}}°</Strong>F.</p><br>
-                    <ul>
-                        <li><Strong>Humidity: </Strong> {{@humidity}}%</li>
-                        <li><Strong>Wind: </Strong> {{@windSpeed}} mph</li>
-                        <li><Strong>Pressure: </Strong> {{@pressure}} inHg</li>
-                        <li><Strong>Pressure: </Strong> {{@pressure}} inHg</li>
-                        <li><Strong>Sunrise: </Strong> {{@sunrise}}</li>
-                        <li><Strong>Sunset: </Strong> {{@sunset}}</li>
-                    </ul>
-                </div>
+            <div class="text-center">
+                <h2>{{ @temperature}}°F</h2>
+                <hr>
+                <p>Today:<Strong> {{@weather}}</Strong> currently. The high will be
+                    <Strong> {{@maxtemp}}°</Strong>F with low of <Strong>{{@mintemp}}°</Strong>F.</p><br>
+                <ul>
+                    <li><Strong>Humidity: </Strong> {{@humidity}}%</li>
+                    <li><Strong>Wind: </Strong> {{@windSpeed}} mph</li>
+                    <li><Strong>Pressure: </Strong> {{@pressure}} inHg</li>
+                    <li><Strong>Sunrise: </Strong> {{@sunrise}}</li>
+                    <li><Strong>Sunset: </Strong> {{@sunset}}</li>
+                </ul>
+                <br><br>
                 <form action="#" method="post">
                     <div class="container-login100-form-bgbtn">
-                        <div class="login100-form-btn"><input class="login100-form-btn" type="submit" name="submit" value="New Search"/>
+                        <div class="login100-form-btn"><input class="login100-form-btn" type="submit" name="submit"
+                                                              value="New Search"/>
                         </div>
                     </div>
                 </form>
             </div>
         </div>
-        <loop from="{{ @i=0 }}" to="{{ @i < count(@imageArray) }}" step="{{ @i++ }}">
-            <h3>{{ @infoArray[@i] }}</h3>
-            <img src="{{ @imageArray[@i] }}" alt="Image not found" scale="0"><br><br>
-        </loop>
+        <div class="wrap-login100">
+            <loop from="{{ @i=0 }}" to="{{ @i < count(@imageArray) }}" step="{{ @i++ }}">
+                <h3>{{ @infoArray[@i] }}</h3>
+                <div class="column">
+                    <img class="hov-img-zoom" src="{{ @imageArray[@i] }}" alt="Image not found" scale="0">
+                </div>
+                <hr>
+                <br>
+            </loop>
+        </div>
     </div>
 </div>
+
+
 <!--===============================================================================================-->
 <script src="vendor/jquery/jquery-3.2.1.min.js"></script>
 <!--===============================================================================================-->
