@@ -29,34 +29,41 @@
 </head>
 <body>
 
-<div class="limiter">
-    <div class="container-login100">
-        <div class="wrap-login100">
-            <button class="btn-outline-danger"><a href='/planner'>Search</a></button>
-
-            <span class="login100-form-title p-b-48">
-						<i class="pointer-event">{{@city}},{{@country}} </i>
-            </span>
-            <iv class="text-center">
-                <h2>{{ @temperature}}°F</h2>
-                <hr>
-                <p>Today:<Strong> {{@weather}}</Strong> currently. The high will be
-                    <Strong> {{@maxtemp}}°</Strong>F with low of <Strong>{{@mintemp}}°</Strong>F.</p><br>
-                <ul>
-                    <li><Strong>Humidity: </Strong> {{@humidity}}%</li>
-                    <li><Strong>Wind: </Strong> {{@windSpeed}} mph</li>
-                    <li><Strong>Pressure: </Strong> {{@pressure}} inHg</li>
-                    <li><Strong>Pressure: </Strong> {{@pressure}} inHg</li>
-                    <li><Strong>Sunrise: </Strong> {{@sunrise}}</li>
-                    <li><Strong>Sunset: </Strong> {{@sunset}}</li>
-                    <li><Strong>Info: </Strong> {{@info}}</li>
-                    <li><Strong>Image: </Strong> {{@infoImg}}</li>
-                </ul>
-            </iv>
+<div class="container limiter">
+    <div class="row container-login101">
+        <div class="col-md-5">
+            <div class="wrap-login100">
+                <span class="login100-form-title p-b-48">
+                            <i class="pointer-event">{{@city}},{{@country}} </i>
+                </span>
+                <div class="text-center">
+                    <h2>{{ @temperature}}°F</h2>
+                    <hr>
+                    <p>Today:<Strong> {{@weather}}</Strong> currently. The high will be
+                        <Strong> {{@maxtemp}}°</Strong>F with low of <Strong>{{@mintemp}}°</Strong>F.</p><br>
+                    <ul>
+                        <li><Strong>Humidity: </Strong> {{@humidity}}%</li>
+                        <li><Strong>Wind: </Strong> {{@windSpeed}} mph</li>
+                        <li><Strong>Pressure: </Strong> {{@pressure}} inHg</li>
+                        <li><Strong>Pressure: </Strong> {{@pressure}} inHg</li>
+                        <li><Strong>Sunrise: </Strong> {{@sunrise}}</li>
+                        <li><Strong>Sunset: </Strong> {{@sunset}}</li>
+                    </ul>
+                </div>
+                <form action="#" method="post">
+                    <div class="container-login100-form-bgbtn">
+                        <div class="login100-form-btn"><input class="login100-form-btn" type="submit" name="submit" value="New Search"/>
+                        </div>
+                    </div>
+                </form>
+            </div>
         </div>
+        <loop from="{{ @i=0 }}" to="{{ @i < count(@imageArray) }}" step="{{ @i++ }}">
+            <h3>{{ @infoArray[@i] }}</h3>
+            <img src="{{ @imageArray[@i] }}" alt="Image not found" scale="0"><br><br>
+        </loop>
     </div>
 </div>
-
 <!--===============================================================================================-->
 <script src="vendor/jquery/jquery-3.2.1.min.js"></script>
 <!--===============================================================================================-->
