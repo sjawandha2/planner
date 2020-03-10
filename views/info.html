@@ -58,10 +58,25 @@
             </div>
         </div>
         <div class="wrap-login100">
+            <h2>Places to visit in {{ @city }}</h2>
+            <hr><hr><br><br>
             <loop from="{{ @i=0 }}" to="{{ @i < count(@imageArray) }}" step="{{ @i++ }}">
                 <h3>{{ @infoArray[@i] }}</h3>
                 <div class="column">
                     <img class="hov-img-zoom" src="{{ @imageArray[@i] }}" alt="Image not found" scale="0">
+                </div>
+                <div class="column">
+                    <p>{{ @description[@i] }}</p>
+                </div>
+                <div class="column">
+                    <check if="{{ @wiki[@i] }}">
+                        <true>
+                            <a href="{{ @wiki[@i] }}" target="_blank"><strong><u>Learn more..</u></strong></a>
+                        </true>
+                        <false>
+                            <p><strong><u>No more information was found..</u></strong></p>
+                        </false>
+                    </check>
                 </div>
                 <hr>
                 <br>
