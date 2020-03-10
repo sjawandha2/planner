@@ -109,6 +109,8 @@ $f3->route('GET|POST /', function ($f3) {
             $details = json_decode($allEvents);
             $imageArray = [];
             $infoArray = [];
+            $descriptionArray =[];
+            $linkArray = [];
 
             if ($details) {
                 //                echo "Here is a list of suggested $kinds: <br>";
@@ -125,12 +127,17 @@ $f3->route('GET|POST /', function ($f3) {
                     $objectUrl = "https://api.opentripmap.com/0.1/$language/places/xid/$xid?apikey=$eventsKey";
                     $objectResponse = json_decode(file_get_contents($objectUrl));
                     $image = $objectResponse->preview->source;
+                    $wiki = $objectResponse->wikipedia;
+                    $description = $objectResponse->wikipedia_extracts->text;
+
 
                     //$infoImg = '<img src="' . $image . '" alt="Image not found" scale="0"><br><br>';
 
 
                     array_push($imageArray, $image);
                     array_push($infoArray, $name);
+                    array_push($descriptionArray, $description);
+                    array_push($linkArray, $wiki);
 
 
                 }//for loop
@@ -138,9 +145,13 @@ $f3->route('GET|POST /', function ($f3) {
                 //save all the images and information into fat-free and the session
                 $f3->set('imageArray', $imageArray);
                 $f3->set('infoArray', $infoArray);
+                $f3->set('description', $descriptionArray);
+                $f3->set('wiki', $linkArray);
 
                 $_SESSION['imageArray'] = $imageArray;
                 $_SESSION['infoArray'] = $infoArray;
+                $_SESSION['description'] = $descriptionArray;
+                $_SESSION['wiki'] = $linkArray;
             }//if details
 
             else {
@@ -150,7 +161,7 @@ $f3->route('GET|POST /', function ($f3) {
             $f3->reroute('info');
         }
 
-    }
+    }//
 
     //Display summary
     $view = new Template();
@@ -178,6 +189,8 @@ $f3->route('GET|POST /info', function ($f3) {
     $sunrise = $_SESSION['sunrise'];
     $imageArray = $_SESSION['imageArray'];
     $infoArray = $_SESSION['infoArray'];
+    $descriptionArray = $_SESSION['description'];
+    $linkArray = $_SESSION['wiki'];
 
     //store all the information in f3 token
     $f3->set('city', $city);
@@ -193,6 +206,8 @@ $f3->route('GET|POST /info', function ($f3) {
     $f3->set('sunrise', $sunrise);
     $f3->set('imageArray', $imageArray);
     $f3->set('infoArray', $infoArray);
+    $f3->set('description', $descriptionArray);
+    $f3->set('wiki',$linkArray);
 
 
     //return to the main page, reset the session
