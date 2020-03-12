@@ -20,33 +20,21 @@ function validForm()
         $f3->set("errors['distance']", "Please enter a valid distance.");
     }
 
-    if (!validKinds($f3->get('places'))) {
-
-        $isValid = false;
-        $f3->set("errors['places']", "Please enter a valid activity place.");
-    }
-
-
     return $isValid;
 }
 
 
 function validCity($city)
 {
-    return ($city!= null && is_string($city));
+    return ($city != null && is_string($city));
 
 }
 
 function validDistance($distance)
 {
-    return ($distance!= null && is_numeric($distance) && $distance >=1);
+    return ($distance != null && is_numeric($distance) && $distance >= 1);
 
 }
 
 
-function validKinds($places)
-{
-    return ($places!= null && is_string($places));
-
-}
 

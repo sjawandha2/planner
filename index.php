@@ -22,18 +22,17 @@ $f3->set('DEBUG', 3);
 $f3->route('GET|POST /', function ($f3) {
 
     if (!empty($_POST)) {
-        $city = $_POST['city'];
-        $kinds = $_POST['places'];
+        $cities = $_POST['city'];
+        $city = strtolower($cities);
         $radi = $_POST['distance'];
 
-        //set value for miles radius
+//        //set value for miles radius
         $f3->set('miles', $radi);
-
-        // convert miles to meters
+//
+//        // convert miles to meters
         $radius = ($radi * 1609);
-
+//
         $f3->set('city', $city);
-        $f3->set('places', $kinds);
         $f3->set('distance', $radius);
 
 
@@ -41,9 +40,9 @@ $f3->route('GET|POST /', function ($f3) {
         if (validForm()) {
 
             $_SESSION['city'] = $city;
-            $_SESSION['places'] = $kinds;
             $_SESSION['distance'] = $radius;
 
+// Weather Api
             $url = 'http://api.openweathermap.org/data/2.5/weather?q=' . $city . '&APPID=5914718d728cfc1314fe1940e92b12ca';
 
             // put the contents of the file into a variable
@@ -72,7 +71,7 @@ $f3->route('GET|POST /', function ($f3) {
             $country = $characters->sys->country;
             $lon = $characters->coord->lon;
             $lat = $characters->coord->lat;
-            $limit = 5;
+            $limit = 25;
 
             //Store all the information to the session and fat-free
             $_SESSION['country'] = $country;
@@ -98,19 +97,41 @@ $f3->route('GET|POST /', function ($f3) {
             $f3->set('sunset', $sunset);
             $f3->set('sunrise', $sunrise);
 
-            //all the attributes to send an api request to opentripmap.com
 
+// Suggestion Api
+
+            //round up the weather temperature to search for suggest places.
+            $roundTemp = round($temperature);
+            $suggestApiUrl = 'https://suggestionsapi.azurewebsites.net/api/id=' . $weather . '&weather=' . $roundTemp;
+            $allSuggestion = file_get_contents($suggestApiUrl);
+            $suggestDetails = json_decode($allSuggestion);
+
+            $places = $suggestDetails->keywords;
             $eventsKey = '5ae2e3f221c38a28845f05b62269320ee1152b3977ead5ffe690f1c5';
             $language = "en";
 
-            //url containing all attributes
-            $eventsUrl = "https://api.opentripmap.com/0.1/$language/places/radius?radius=$radius&lon=$lon&lat=$lat&limit=$limit&kinds=$kinds&apikey=$eventsKey";
-            $allEvents = file_get_contents($eventsUrl);
-            $details = json_decode($allEvents);
+            //all the attributes to send an api request to opentripmap.com
+            // add the places to trip map api to search for info
             $imageArray = [];
             $infoArray = [];
-            $descriptionArray =[];
+            $descriptionArray = [];
             $linkArray = [];
+
+            for ($i = 0, $len = count($places); $i < $len; $i++) {
+                $allplaces = $places[$i];
+
+                $places = $suggestDetails->keywords;
+
+                $eventsUrl = "https://api.opentripmap.com/0.1/$language/places/radius?radius=$radius&lon=$lon&lat=$lat&limit=$limit&kinds=$allplaces&apikey=$eventsKey";
+                $allEvents = file_get_contents($eventsUrl);
+                $details = json_decode($allEvents);
+
+                $imageArray = [];
+                $infoArray = [];
+                $descriptionArray = [];
+                $linkArray = [];
+
+            }//for loop
 
             if ($details) {
                 //                echo "Here is a list of suggested $kinds: <br>";
@@ -152,8 +173,7 @@ $f3->route('GET|POST /', function ($f3) {
                 $_SESSION['infoArray'] = $infoArray;
                 $_SESSION['description'] = $descriptionArray;
                 $_SESSION['wiki'] = $linkArray;
-            }//if details
-
+            } //if detail
             else {
 
                 echo "Try a larger distance than $radius miles";
@@ -161,12 +181,14 @@ $f3->route('GET|POST /', function ($f3) {
             $f3->reroute('info');
         }
 
-    }//
+
+    }// if POST
 
     //Display summary
     $view = new Template();
     echo $view->render('views/planner.html');
 });
+
 
 //Define a default route
 $f3->route('GET|POST /info', function ($f3) {
@@ -207,7 +229,7 @@ $f3->route('GET|POST /info', function ($f3) {
     $f3->set('imageArray', $imageArray);
     $f3->set('infoArray', $infoArray);
     $f3->set('description', $descriptionArray);
-    $f3->set('wiki',$linkArray);
+    $f3->set('wiki', $linkArray);
 
 
     //return to the main page, reset the session
